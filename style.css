@@ -1,0 +1,109 @@
+.navbar{
+  position: sticky;
+  top: 0;
+  background-color: #f6f3f36a;
+  border: none;
+  box-shadow: none;
+  padding:0 2.5rem ;
+}
+.containers{
+  width:100%;
+  height:55vh;
+  background-image:linear-gradient(to right bottom ,#fcfcfc3e ,#fcfcfc41) ,url(./Resources/background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* Custom Sidenav */
+.sidenav-custom {
+  width: 80px;
+  transition: width 0.3s;
+  overflow: hidden;
+  white-space: nowrap; /* Prevent text wrapping */
+  position: relative;
+  background-color: #ffffff27;
+}
+
+.sidenav-custom:hover {
+  width: 250px;
+  background-color: #ffffff9d;
+}
+
+/* Hide text initially */
+.sidenav-custom li a .text {
+  opacity: 0;
+  margin-left: 0;
+  transition: opacity 0.3s, margin-left 0.3s;
+}
+
+.sidenav-custom:hover li a .text {
+  opacity: 1;
+  margin-left: 10px;
+}
+
+/* User info styling */
+.user-view {
+  padding: 10px 0px;
+  text-align:left; /* Align content to the left */
+  
+}
+
+
+/* Keep username and role in place but hidden initially */
+.user-view .name,
+.user-view .role {
+  opacity: 0; /* Hide text initially */
+  color: rgb(0, 0, 0);
+  transition: opacity 0.3s ease-in-out;
+  visibility: hidden; /* Prevent interaction when hidden */
+}
+
+/* On hover, show the name and role */
+.sidenav-custom:hover .user-view .name,
+.sidenav-custom:hover .user-view .role {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Ensure the layout doesn't change */
+.user-view .name, 
+.user-view .role {
+  height: 20px;
+
+  margin-left: 10px; /* Adjust position to align text with icon */
+}
+
+.sidenav-custom:hover .user{
+  border-bottom: 2px  solid #fff;
+
+}
+/* Content styling */
+.content {
+  margin-left: 20px;
+}
+
+.sidenav-fixed {
+  position: fixed;
+}
+
+
+
+/*media query*/
+/* Custom styles for responsiveness */
+.brand-logo img {
+  max-height: 25px;
+}
+
+@media only screen and (max-width: 992px) { /* Tablet */
+  .brand-logo h5 {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 600px) { /* Mobile */
+  .brand-logo h5 {
+    font-size: 1rem;
+  }
+}

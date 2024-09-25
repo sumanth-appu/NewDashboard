@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dashnoard</title>
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <!-- external CSS-->
+  <link rel="stylesheet" href="./style.css">
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+  <!-- Compiled and minified CSS for icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body ng-app="myApp" ng-controller="MainCtrl">
+  <nav class="navbar black-text" style="z-index: 10000;" >
+    <div class="nav-wrapper container">
+      <!-- Mobile Menu Button -->
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons black-text">menu</i></a>
+
+      <!-- Logo and text -->
+      <a href="#" class="brand-logo valign-wrapper" style="display: flex; justify-content: space-between">
+        <img src="./Resources/GMR_Group_(logo).svg.png" alt="Logo" class="nav-logo" />
+        &nbsp;&nbsp;
+        <img src="./Resources/image.png" alt="Logo" class="nav-logo" />
+        &nbsp;&nbsp;
+        <h5 class="black-text">SmartEMS v2.37</h5>
+      </a>
+
+      <!-- Laptop View Links -->
+      <ul class="right hide-on-med-and-down" >
+        <li><span class="user-info">user Name</span></li>
+        <li><a href="#"><i class="material-icons black-text">settings</i></a></li>
+        <li><a href="#"><i class="material-icons black-text">logout</i></a></li>
+        <li>
+          <img src="./Resources/bosch.png" alt="Bosch Logo" style="margin-top: 20px; height: 25px;" />
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Mobile View Sidenav -->
+  
+  <ul id="mobile-demo" class="sidenav" style="z-index: 1000000;">
+    <li><div class="user-view"  style="border-bottom: .2rem solid black;">
+      <div>
+        <img src="./Resources/bosch.png"  alt="Background Image" width="100%"  style="margin-right: 2px;"/>
+      </div>
+      
+    </div></li>
+    <li><a href="#!"><i class="material-icons black-text">info</i> info</a></li>
+    <li><a href="#!"><i class="material-icons black-text">settings</i>settings</a></li>
+    
+    
+    <li><a class="waves-effect" href="#!"><i class="material-icons black-text">logout</i>logout</a></li>
+  </ul>
+  <!-- Mobile Menu (for small screens) -->
+  
+   
+<div class="containers valign-wrapper">
+  <!-- <div class="container" style="width: 40rem; border-radius:20%">
+    <marquee direction="left"> <h1><strong>Welcome to Descom</h1></strong></marquee>
+  </div> -->
+</div>
+
+<div class="fixed-action-btn ">
+  <a class="btn-floating btn-large white ">
+    <i class="large material-icons black-text ">mode_edit</i>
+  </a>
+  <ul>
+    <li ng-repeat="card in cards"><a class="btn-floating hoverable" ng-class="card.color"><i class="material-icons black-text">{{ card.icon }}</i></a></li>
+  </ul>
+</div>
+<div class="container">
+  <h2 style="margin: 3rem;" ><strong> Services</strong></h2>
+</div>
+<div class="container center-align" style="margin-top: 2rem;">
+ 
+  <div class="row">
+    <div class="col s12 m6 l4" ng-repeat="card in cards" style="border-radius: 5rem; min-width:20rem">
+      <div class="card hoverable" style="margin-left: 3px; padding: 3px; position: relative; border-radius: 5%;" ng-class="card.color">
+        <div class="card-content">
+          <span class="card-title">
+            <i class="material-icons left medium white-text">{{card.icon}}</i>
+            <strong>{{card.title}}</strong>
+            <i class="material-icons right large white-text" ng-style="{'opacity': '0.25'}" style="z-index: 10000;">{{card.icon}}</i>
+          </span>
+        </div>
+        <br />
+        <div class="card-action lighten3">
+          <div class="progress container">
+            <div class="determinate grey lighten-1" style="width: {{card.progress}}%"></div>
+          </div>
+          <a href="{{card.link}}" ng-if="!card.modalTrigger">
+            <i class="material-icons right white-text">arrow_forward</i>
+          </a>
+          <!-- For API Status card, trigger modal -->
+          <a class="modal-trigger" href="#error-modal" ng-click="loadErrors()" ng-if="card.modalTrigger">
+            <i class="material-icons right white-text">error</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   <!-- Modal Structure -->
+   <div id="error-modal" class="modal">
+    <div class="modal-content">
+      <h4>Latest Errors</h4>
+ <!-- User Input for Number of Errors inside the modal -->
+      <div class="input-field">
+        <label for="numErrorsToShow">Number of Errors to Display:</label>
+        <input type="number" id="numErrorsToShow" ng-model="numErrorsToShow" min="5">
+      </div>
+
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#auth-errors">Auth Errors</a></li>
+        <li class="tab col s3"><a href="#http-errors">HTTP Errors</a></li>
+        <li class="tab col s3"><a href="#api-errors">API Errors</a></li>
+      </ul>
+
+      <!-- Auth Errors -->
+      <div id="auth-errors">
+        <ol id="auth-error-list"></ol>
+      </div>
+
+      <!-- HTTP Errors -->
+      <div id="http-errors">
+        <ol id="http-error-list"></ol>
+      </div>
+
+      <!-- API Errors -->
+      <div id="api-errors">
+        <ol id="api-error-list"></ol>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('.modal');
+      M.Modal.init(elems);
+
+      var tabElems = document.querySelectorAll('.tabs');
+      M.Tabs.init(tabElems);
+    });
+  </script>
+  
+  <script src="./app.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.fixed-action-btn');
+      M.FloatingActionButton.init(elems);
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(elems);
+    });
+  </script>
+  
+</body>
+<footer class="page-footer blue-grey lighten-3">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Footer Content</h5>
+        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    © 2014 Copyright Text
+    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+    </div>
+  </div>
+</footer>
+</html>
